@@ -29,6 +29,7 @@ public class PlayerStateController : MonoBehaviour
     // Aquest metode es crida despres de Update() a cada frame.
     void LateUpdate()
     {
+        if (!GameStates.gameActive) return;
         // Recollir l'input actual en el Horizontal axis (eix horitzontal)
         float horizontal = Input.GetAxis("Horizontal");
         float jump = Input.GetAxis("Jump");

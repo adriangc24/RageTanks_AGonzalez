@@ -9,6 +9,7 @@ TagManager:
   - PlayerBullet2
   - Enemy
   - Boss
+  - RoundWatcher
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - Vortex_back
   - Vortex_center
   - Vortex_front
-  - 
+  - StartGame
   - 
   - 
   - 

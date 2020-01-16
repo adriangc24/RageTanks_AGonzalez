@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\EnemyControllerScript.cs" />
     <Compile Include="Assets\Scripts\EnemyGuideWatcher.cs" />
     <Compile Include="Assets\Scripts\EnemyRespawner.cs" />
+    <Compile Include="Assets\Scripts\GameStates.cs" />
     <Compile Include="Assets\Scripts\HitByBoss.cs" />
     <Compile Include="Assets\Scripts\ParallaxScript2.cs" />
     <Compile Include="Assets\Scripts\ParticleLayering.cs" />
@@ -80,9 +81,11 @@
     <Compile Include="Assets\Scripts\PlayerStateController.cs" />
     <Compile Include="Assets\Scripts\PlayerStateListener.cs" />
     <Compile Include="Assets\Scripts\RotationAnimation.cs" />
+    <Compile Include="Assets\Scripts\RoundWatcher.cs" />
     <Compile Include="Assets\Scripts\ScoreWatcher.cs" />
     <Compile Include="Assets\Scripts\ScoreWatcher2.cs" />
     <Compile Include="Assets\Scripts\SelfDestruct.cs" />
+    <Compile Include="Assets\Scripts\StartButtonController.cs" />
     <Compile Include="Assets\Scripts\TakeDamageFromPlayerBullet.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>T:/AA PROGRAMAS/Unity/RageTanks_AGonzalez-master/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>

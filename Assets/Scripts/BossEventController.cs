@@ -9,6 +9,7 @@ public class BossEventController : MonoBehaviour
     public static event bossAttack crushPlayer;
     public GameObject inActiveNode = null;
     public GameObject dropToStartNode = null;
+    public ParticleSystem deathFxParticlePrefab = null;
     public GameObject dropFXSpawnPoint = null;
     public List<GameObject> dropNodeList = new List<GameObject>();
     public GameObject bossDeathFX = null;
@@ -17,6 +18,7 @@ public class BossEventController : MonoBehaviour
     public float moveSpeed = 0.1f;
     public float eventWaitDelay = 3f; // Temps d'espera entre events del Boss
     public int enemiesToStartBattle = 10;
+
     public enum bossEvents
     {
         inactive = 0,
@@ -34,7 +36,7 @@ public class BossEventController : MonoBehaviour
     // Posició de desti quan es salta a la plataforma.
     private Vector3 targetPosition = Vector3.zero;
     // Nivell de vida del Boss
-    public int health = 20;
+    public static int health = 20;
     // Nivell de vida inicial del Boss
     private int startHealth = 20;
     // Indicador de si s'ha matat el Boss
@@ -53,6 +55,7 @@ public class BossEventController : MonoBehaviour
         EnemyControllerScript.enemyDied -= enemyDied;
     }
 
+
     void Start()
     {
         transform.position = inActiveNode.transform.position;
@@ -61,6 +64,13 @@ public class BossEventController : MonoBehaviour
 
     void Update()
     {
+        if(currentEvent == bossEvents.inactive)
+        {
+           
+        }
+        else
+        {
+        }
         switch (currentEvent)
         {
             case bossEvents.inactive:
@@ -145,6 +155,25 @@ public class BossEventController : MonoBehaviour
                 }
                 break;
         }
+        if (health <= 0)
+        {
+            Debug.Log("Killing Boss");
+            // Crear l'objecte emissor de partícules
+            ParticleSystem deathFxParticle =
+            (ParticleSystem)Instantiate(deathFxParticlePrefab);
+            // Obtenir la posició de l'enemic
+            Vector3 bossPos = transform.position;
+            // Crear un nou vector davant de l'enemic (incrementar component z)
+            Vector3 particlePosition =
+            new Vector3(bossPos.x, bossPos.y, bossPos.z + 1.0f);
+            // Posicionar l'emissor de partícules en aquesta nova posició
+            deathFxParticle.transform.position = particlePosition;
+            // Generar l'event “bossDied” amb una puntuació de 1000 punts
+            ScoreWatcher2.addScore(1000);
+            health = startHealth;
+            bossDied(1000);
+            killBoss();
+        }
     }
 
     public void beginBossBattle()
@@ -168,6 +197,7 @@ public class BossEventController : MonoBehaviour
 
     void hitByPlayerBullet()
     {
+        Debug.Log(health);
         health -= 1;
         // Si s'ha acabat la vida, el matem
         if (health <= 0)
@@ -188,9 +218,9 @@ public class BossEventController : MonoBehaviour
         isDead = true;
         //Implementar sistema de partícules de destrucció del Boss: bossDeathFX
 
-        // Generar l'event “bossDied” amb una puntuació de 1000 punts
+       
         if (bossDied != null)
-            bossDied(100);
+            //bossDied(1000);
 
         // Tornar a posició inactiva inicial
         transform.position = inActiveNode.transform.position;
@@ -199,6 +229,7 @@ public class BossEventController : MonoBehaviour
         currentEvent = BossEventController.bossEvents.inactive;
         timeForNextEvent = 0.0f;
         enemiesLeftToKill = enemiesToStartBattle;
+        health = startHealth;
     }
     void enemyDied(int enemyScore)
     {

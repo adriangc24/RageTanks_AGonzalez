@@ -6,5 +6,9 @@ public class DestroyOnCollision : MonoBehaviour
     {
         Debug.Log("DestroyOnCollision. Bala col·lisionada amb objecte "+hitObj.tag);
         DestroyObject(gameObject);
+        if (hitObj.tag == "Boss")
+        {
+            BossEventController.health -= 1;
+        }
     }
 }
